@@ -1,14 +1,11 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        if len(s) != len(t):
-            return False
-        map = {}
+        map_s = defaultdict(int)
+        map_t = defaultdict(int)
         for ch in s:
-            map[ch] = map.get(ch, 0) + 1
+            map_s[ch]+=1
         for ch in t:
-            map[ch] = map.get(ch, 0) - 1
-        for key in map:
-            if map[key] != 0:
-                return False
-        return True
+            map_t[ch]+=1
+        return map_t == map_s
+            
 
