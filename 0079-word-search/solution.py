@@ -1,25 +1,34 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        rows, cols = len(board), len(board[0])
+        visited = set()
         n = len(word)
+        rows, cols = len(board), len(board[0])
 
-        def explore(r, c, index):
-            if r < 0 or c < 0 or r >= rows or c >= cols:
-                return False
-            if board[r][c] != word[index]:
+        def explore(i, j, index):
+            if (
+                i >= rows
+                or i < 0
+                or j >= cols
+                or j < 0
+                or board[i][j] != word[index]
+                or (i, j) in visited
+            ):
                 return False
             if index == n - 1:
                 return True
-            temp = board[r][c]
-            board[r][c] = "#"
-            found = (explore(r+1, c, index+1) or explore(r-1, c, index+1) or explore(r, c+1, index+1) or explore(r, c-1, index+1))
-            board[r][c] = temp
-            return found
+            visited.add((i, j))
+            next_cell = (
+                explore(i + 1, j, index + 1)
+                or explore(i - 1, j, index + 1)
+                or explore(i, j + 1, index + 1)
+                or explore(i, j - 1, index + 1)
+            )
+            visited.remove((i, j))
+            return next_cell
 
         for i in range(rows):
             for j in range(cols):
-                if board[i][j] == word[0] and explore(i, j, 0):
+                if board[i][j] == word[0] and explore(i, j,0):
                     return True
-
         return False
 
