@@ -10,10 +10,9 @@ class Solution:
         curr = head
         prev = None
         while curr:
-            if prev!= None and curr.val == prev.val:
+            if prev and prev.val == curr.val:
                 prev.next = curr.next
             else:
                 prev = curr
-            curr = curr.next 
+            curr = curr.next
         return head
-
