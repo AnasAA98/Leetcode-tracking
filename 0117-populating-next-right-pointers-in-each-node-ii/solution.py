@@ -12,19 +12,18 @@ class Solution:
     def connect(self, root: 'Node') -> 'Node':
         if not root:
             return root
-
         q = deque()
         q.append(root)
         while q:
             prev = None
             for _ in range(len(q)):
-                curr = q.popleft()
+                node = q.popleft()
                 if prev:
-                    prev.next = curr
-                prev = curr
-                if curr.left:
-                    q.append(curr.left)
-                if curr.right:
-                    q.append(curr.right)
-        return root
+                    prev.next = node
+                prev = node
 
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+        return root
