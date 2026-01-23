@@ -1,22 +1,21 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        rows, cols = len(grid),len(grid[0])
+        rows,cols = len(grid), len(grid[0])
         visited = set()
-        num_islands = 0
+        total = 0
         def explore(r,c):
-            if r<0 or r>=rows or c<0 or c>= cols or (r,c) in visited or grid[r][c] =="0":
+            if r<0 or r>= rows or c<0 or c>=cols or (r,c) in visited or grid[r][c] == "0":
                 return
             visited.add((r,c))
-            explore(r + 1, c)
-            explore(r - 1, c)
-            explore(r, c + 1)
-            explore(r, c - 1)
-        
+            explore(r+1, c)
+            explore(r-1, c)
+            explore(r, c+1)
+            explore(r, c-1)
         
         
         for i in range(rows):
             for j in range(cols):
                 if grid[i][j] == "1" and (i,j) not in visited:
-                    explore(i,j)
-                    num_islands+=1
-        return num_islands
+                    total+=1
+                    explore(i, j)
+        return total
