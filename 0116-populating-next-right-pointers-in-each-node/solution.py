@@ -15,7 +15,7 @@ class Solution:
         q = deque()
         q.append(root)
         while q:
-            prev  = None
+            prev = None
             for _ in range(len(q)):
                 curr = q.popleft()
                 if prev:
