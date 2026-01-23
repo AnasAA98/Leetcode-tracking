@@ -9,8 +9,8 @@ class Solution:
         def dfs(node,min_val,max_val):
             if not node:
                 return True
-            if node.val >= max_val or node.val <= min_val:
+            if node.val>= max_val or node.val <= min_val:
                 return False
-            return (dfs(node.left,min_val, node.val) and 
-                    dfs(node.right, node.val,max_val))
-        return dfs(root, -inf,inf)
+            return dfs(node.left,min_val,node.val) and dfs(node.right,node.val,max_val)
+            
+        return dfs(root,-inf,inf)
