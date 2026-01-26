@@ -1,38 +1,40 @@
-from collections import deque
-from typing import List
-
 class Solution:
     def solve(self, board: List[List[str]]) -> None:
-        if not board or not board[0]:
-            return
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        row,col = len(board),len(board[0])
+        def dfs(r,c):
+            if r < 0 or r>=row or c<0 or c>=col or board[r][c] != 'O':
+                return
+            board[r][c] = 'T'
+            dfs(r+1,c)
+            dfs(r-1,c)
+            dfs(r,c+1)
+            dfs(r,c-1)  
+        # top row
+        for i in range(col):
+            if board[0][i] == 'O':
+                dfs(0, i)
 
-        R, C = len(board), len(board[0])
-        q = deque()
+        # bottom row
+        for j in range(col):
+            if board[row-1][j] == 'O':
+                dfs(row-1, j)
 
-        def add(r, c):
-            if board[r][c] == "O":
-                board[r][c] = "T"   # mark when enqueuing to avoid duplicates
-                q.append((r, c))
+        # left col
+        for k in range(row):
+            if board[k][0] == 'O':
+                dfs(k, 0)
 
-        for c in range(C):
-            add(0, c)
-            add(R - 1, c)
-        for r in range(R):
-            add(r, 0)
-            add(r, C - 1)
-
-        while q:
-            r, c = q.popleft()
-            for dr, dc in ((1,0), (-1,0), (0,1), (0,-1)):
-                nr, nc = r + dr, c + dc
-                if 0 <= nr < R and 0 <= nc < C and board[nr][nc] == "O":
-                    board[nr][nc] = "T"
-                    q.append((nr, nc))
-
-        for r in range(R):
-            for c in range(C):
-                if board[r][c] == "O":
-                    board[r][c] = "X"
-                elif board[r][c] == "T":
+        # right col
+        for m in range(row):
+            if board[m][col-1] == 'O':
+                dfs(m, col-1)
+        for r in range(row):
+            for c in range(col):
+                if board[r][c] == "T":
                     board[r][c] = "O"
+                elif board[r][c] == 'O':
+                    board[r][c] ='X'
 
