@@ -1,9 +1,16 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        result = [[]]
-        for num in nums:
-            curr_sub = []
-            for subsets in result:
-                curr_sub.append(subsets+[num])
-            result.extend(curr_sub)
+        path = []
+        result = []
+        n = len(nums)
+        def dfs(index):
+            if index == n:
+                result.append(path[:])
+                return
+            dfs(index+1)
+            path.append(nums[index])
+            dfs(index+1)
+            path.pop()
+
+        dfs(0)
         return result
