@@ -1,30 +1,31 @@
 class RandomizedSet:
 
     def __init__(self):
-        self.mapNum = {}
-        self.listNum = []
+        self.map = {}  # val,index
+        self.nums = []  # index -> val
 
     def insert(self, val: int) -> bool:
-        res = val not in self.mapNum
-        if res:
-            self.mapNum[val] = len(self.listNum)
-            self.listNum.append(val)
-            
-        return res
-
+        result = True if val not in self.map else False
+        if result:
+            self.nums.append(val)
+            index = len(self.nums) - 1
+            self.map[val] = index
+        return result         
     def remove(self, val: int) -> bool:
-        res = val in self.mapNum
+        # to remove it will be a simple  swap operation between val[index] and val[-1]
+        res = True if val in self.map else False
         if res:
-            index = self.mapNum[val]
-            lastVal = self.listNum[-1]
-            self.listNum[index] = lastVal
-            self.listNum.pop()
-            self.mapNum[lastVal] = index
-            del self.mapNum[val]
+            index = self.map[val]
+            last_val = self.nums[-1]
+            self.nums[index] = last_val
+            self.nums.pop()
+            self.map[last_val] = index
+            del self.map[val]
         return res
 
     def getRandom(self) -> int:
-        return random.choice(self.listNum)
+        return random.choice(self.nums)
+        
 
 
 # Your RandomizedSet object will be instantiated and called as such:
@@ -32,4 +33,3 @@ class RandomizedSet:
 # param_1 = obj.insert(val)
 # param_2 = obj.remove(val)
 # param_3 = obj.getRandom()
-
