@@ -1,14 +1,12 @@
 class Solution:
     def integerReplacement(self, n: int) -> int:
-        steps = 0
-        while n != 1:
-            if n% 2==0:
-                n//= 2
+        nums = {1:0}
+        def dfs(i):
+            if i in nums:
+                return nums[i]
+            if i % 2 == 0:
+                nums[i] = 1 + dfs(i//2)
             else:
-                if n == 3 or n%4 == 1:
-                    n-=1
-                else:
-                    n+=1
-            steps+=1
-        return steps
-
+                nums[i] = 1 +  min(dfs(i+1),dfs(i-1))
+            return nums[i]
+        return dfs(n)
