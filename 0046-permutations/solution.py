@@ -3,14 +3,15 @@ class Solution:
         result = []
         path = []
         n = len(nums)
-        def dfs(path):
-            if len(path) == n:
+        def dfs(index):
+            if index == n:
                 result.append(path[:])
                 return
             for x in nums:
                 if x not in path:
                     path.append(x)
-                    dfs(path)
+                    dfs(index+1)
                     path.pop()        
-        dfs(path)
+
+        dfs(0)
         return result
