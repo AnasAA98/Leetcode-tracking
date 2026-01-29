@@ -1,7 +1,7 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        path = []
         result = []
+        path = []
         n = len(nums)
         def dfs(index):
             if index == n:
@@ -12,5 +12,6 @@ class Solution:
             dfs(index+1)
             path.pop()
 
+        
         dfs(0)
         return result
