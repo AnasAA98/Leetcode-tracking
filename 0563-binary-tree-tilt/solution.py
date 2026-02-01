@@ -6,13 +6,11 @@
 #         self.right = right
 class Solution:
     def findTilt(self, root: Optional[TreeNode]) -> int:
-        def dfs(node):
-            if not node:
+        def dfs(node):  # dfs will return sum + current tilt
+            if not node :
                 return 0,0
-            left_sum,left_tilt = dfs(node.left)
-            right_sum,right_tilt = dfs(node.right)
-            tilt = abs(left_sum - right_sum)
-            tilt+= left_tilt+ right_tilt
-            return left_sum+right_sum+node.val, tilt
-        return dfs(root)[1]     
-
+            left_node,left_tilt = dfs(node.left)
+            right_node,right_tilt = dfs(node.right)
+            tilt = abs(left_node - right_node) + left_tilt + right_tilt
+            return left_node+right_node + node.val,tilt
+        return dfs(root)[1]
