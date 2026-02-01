@@ -10,6 +10,6 @@ class Solution:
             cache[x] = 1 + power(nxt)
             return cache[x]
         for i in range(lo,hi+1):
-            result.append((i,power(i)))
-        ouptut = sorted(result, key= lambda x:(x[1],x[0]))
-        return ouptut[k-1][0]
+            result.append((power(i),i))
+        result.sort()
+        return result[k-1][1]
