@@ -3,10 +3,11 @@ class Solution:
         result = []
         path = []
         def dfs(num_open,num_close):
-            if num_close == n and num_open==n:
+            if num_close == n and num_open == n:
                 result.append("".join(path))
+                return
             if num_open < n:
-                path.append('(')
+                path.append("(")
                 dfs(num_open+1, num_close)
                 path.pop()
             if num_close < num_open:
