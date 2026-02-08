@@ -6,17 +6,17 @@ class Solution:
             if ch in opp:
                 a = stack.pop()
                 b = stack.pop()
-              
                 if ch == "+":
                     stack.append(a+b)
-                elif ch == '*':
+                if ch == "*":
                     stack.append(a*b)
-                elif ch =='-':
+                if ch == "-":
                     stack.append(b-a)
-              
-                else:
+                if ch == '/':
                     stack.append(int(b/a))
             
             else:
                 stack.append(int(ch))
         return stack[0]
+
+
