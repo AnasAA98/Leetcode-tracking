@@ -7,8 +7,7 @@ class Solution:
                 candidate = x
                 freq = 1
             elif x == candidate:
-                freq+=1
+                freq += 1
             else:
-                freq-=1
+                freq -= 1
         return candidate
-
