@@ -1,51 +1,50 @@
 class Node:
-    def __init__(self,key=0,val=0,next=None,prev=None):
-        self.key = key
-        self.val = val
-        self.next,self.prev = next,prev
+    def __init__(self,key,val):
+        self.key,self.val = key,val
+        self.prev = self.next = None  # node(key,val), node.val = (key,value)
 class LRUCache:
-
     def __init__(self, capacity: int):
-        self.map = {}
-        self.capacity = capacity
-        self.head,self.tail = Node(0,0), Node(0,0)
-        self.head.next,self.tail.prev=self.tail,self.head
-    
-    def inset_front(self, node):
-        last = self.tail.prev
-        last.next = node
-        node.prev = last
-        node.next = self.tail
-        self.tail.prev = node
-    
-    def remove(self, node):
-        prev,nex = node.prev, node.next
-        prev.next,nex.prev = nex, prev
+        self.cap = capacity
+        self.cache = {} # key: node
+        self.left,self.right = Node(0,0),Node(0,0)
+        # left = :LRU, right:MRU
+        self.left.next = self.right
+        self.right.prev = self.left
+
+    def remove(self,node):
+        a = node.prev
+        b = node.next
+        a.next = b
+        b.prev = a
+
+    def insert(self,node):
+        lru = self.right.prev
+        lru.next = node
+        node.next = self.right
+        self.right.prev = node
+        node.prev = lru
 
     def get(self, key: int) -> int:
-        if key in self.map:
-            result = self.map[key]
-            self.remove(result)
-            self.inset_front(result)
-            return result.val
-        else:
-            return -1
+        if key in self.cache:
+            self.remove(self.cache[key])
+            self.insert(self.cache[key])
+            return self.cache[key].val
+        return -1
         
 
     def put(self, key: int, value: int) -> None:
-        if key in self.map:
-            node = self.map[key]
-            node.val = value
-            self.remove(node)
-            self.inset_front(node)
-            return
-        if len(self.map) == self.capacity:
-            lru = self.head.next
-            self.remove(lru)
-            del self.map[lru.key]
+        if key in self.cache:
+            self.remove(self.cache[key])
         node = Node(key,value)
-        self.map[key] = node
-        self.inset_front(node)
+        self.cache[key] = node
+        self.insert(node)
+        if len(self.cache) > self.cap:
+            lru = self.left.next
+            self.remove(lru)
+            del self.cache[lru.key]
+
+
+
         
 
 
