@@ -11,7 +11,8 @@ class Solution:
             path.append(nums[index])
             dfs(index+1)
             path.pop()
-
-        
         dfs(0)
         return result
+        
+
+            
