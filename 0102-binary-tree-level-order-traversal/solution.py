@@ -9,10 +9,10 @@ class Solution:
         if not root:
             return []
         q = deque()
+        res = []
         q.append(root)
-        result = []
         while q:
-            temp = []
+            temp =[]
             for _ in range(len(q)):
                 curr = q.popleft()
                 temp.append(curr.val)
@@ -20,5 +20,5 @@ class Solution:
                     q.append(curr.left)
                 if curr.right:
                     q.append(curr.right)
-            result.append(temp)
-        return result 
+            res.append(temp)
+        return res
