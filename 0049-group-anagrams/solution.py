@@ -1,7 +1,8 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        sort_map = defaultdict(list)
+        my_map = defaultdict(list)
         for word in strs:
-            sorted_word = "".join(sorted(word))
-            sort_map[sorted_word].append(word)
-        return [val for k,val in sort_map.items()]
+            key = ''.join(sorted(word))
+            my_map[key].append(word)
+        return [my_map[k] for k in my_map]
+
