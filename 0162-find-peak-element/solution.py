@@ -1,12 +1,11 @@
 class Solution:
     def findPeakElement(self, nums: List[int]) -> int:
-        n = len(nums)
-        lo,hi = 0, n-1
-        while lo < hi :
-            mid = (lo + hi ) // 2
-            if nums[mid] > nums[mid+1]:
-                hi = mid
+        left = 0 
+        right = len(nums) - 1
+        while left < right :
+            mid = (left + right) // 2
+            if nums[mid] < nums[mid+1]:
+                left = mid + 1
             else:
-                lo = mid + 1
-        return lo
-
+                right = mid 
+        return left
