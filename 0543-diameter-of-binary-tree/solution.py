@@ -9,10 +9,10 @@ class Solution:
         def dfs(node):
             if not node:
                 return 0,0
-            left_h, left_diam = dfs(node.left)
+            left_h,left_diam = dfs(node.left)
             right_h, right_diam = dfs(node.right)
-            height = 1 + max(left_h, right_h)
-            diam = max(left_diam,right_diam,left_h + right_h)
+            height = 1 + max(left_h,right_h)
+            diam = max(left_diam,right_diam,left_h+right_h)
             return height,diam
         return dfs(root)[1]
 
