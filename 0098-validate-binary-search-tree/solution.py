@@ -9,7 +9,7 @@ class Solution:
         def valid(node,min_val,max_val):
             if not node:
                 return True
-            if node.val >= max_val or node.val <= min_val:
+            if node.val>=max_val or node.val <= min_val:
                 return False
-            return (valid(node.left,min_val,node.val) and valid(node.right, node.val, max_val))
-        return valid(root,float('-inf'),float('inf'))
+            return valid(node.left,min_val,node.val) and valid(node.right,node.val,max_val)
+        return valid(root,-math.inf,math.inf)
