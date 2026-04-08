@@ -4,14 +4,13 @@ class Solution:
         right = max(piles)
         res = right
         while left <= right:
-            speed = (left + right) // 2  
-            hours = 0
-            for i in range(len(piles)):
-                hours += (piles[i] + speed - 1) // speed
-            if hours <= h:
-                right = speed - 1
-                res = min(res, speed)
+            k = (left + right) // 2
+            curr_hours = 0
+            for pile in piles:
+                curr_hours += math.ceil(pile / k)
+            if curr_hours <= h:
+                res = min (res, k)
+                right = k - 1
             else:
-                left = speed + 1
+                left = k + 1
         return res
-
