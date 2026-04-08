@@ -10,14 +10,7 @@ class Solution:
             return None
         root = TreeNode(postorder[-1])
         mid = inorder.index(postorder[-1])
-
-        left_inorder = inorder[:mid]
-        right_inorder = inorder[mid+1:]
-        
-        left_postorder = postorder[: mid]
-        right_postorder = postorder[mid:-1]
-
-        root.left = self.buildTree(left_inorder, left_postorder)
-        root.right = self.buildTree(right_inorder, right_postorder)
-
+        root.left = self.buildTree(inorder[:mid], postorder[:mid])
+        root.right = self.buildTree(inorder[mid + 1:], postorder[mid:-1])
         return root
+
