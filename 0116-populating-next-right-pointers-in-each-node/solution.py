@@ -11,7 +11,7 @@ class Node:
 class Solution:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
         if not root:
-            return root
+            return None
         q = deque()
         q.append(root)
         while q:
@@ -20,10 +20,10 @@ class Solution:
                 curr = q.popleft()
                 if prev:
                     prev.next = curr
-                prev = curr
                 if curr.left:
                     q.append(curr.left)
                 if curr.right:
                     q.append(curr.right)
+                prev = curr
+            prev.next = None
         return root
-
