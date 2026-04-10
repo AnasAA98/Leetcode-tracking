@@ -1,18 +1,17 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        result = []
-        path = []
-        def dfs(num_open,num_close):
-            if num_close == n and num_open == n:
-                result.append("".join(path))
+        res = []
+        def dfs(num_open,num_close,path):
+            if num_open == n and n == num_close:
+                res.append("".join(path))
                 return
             if num_open < n:
                 path.append("(")
-                dfs(num_open+1, num_close)
+                dfs(num_open+1,num_close,path)
                 path.pop()
-            if num_close < num_open:
-                path.append(')')
-                dfs(num_open, num_close+1)
+            if num_close < num_open :
+                path.append(")")
+                dfs(num_open,num_close+1,path)
                 path.pop()
-        dfs(0,0)
-        return result
+        dfs(0,0,[])
+        return res
