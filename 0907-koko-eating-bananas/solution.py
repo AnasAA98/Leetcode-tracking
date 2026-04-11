@@ -4,14 +4,14 @@ class Solution:
         right = max(piles)
         res = max(piles)
         while left <= right:
-            k = (left + right) // 2 # candiate speed
+            k = (left+right) // 2 # candidate speed
             curr_h = 0
             for pile in piles:
-                curr_h += math.ceil(pile / k)
-            if curr_h <= h:
-                res = min(res,k)
-                right = k - 1
-            else:
+                curr_h += math.ceil(pile / k) # number of hours needed to finish each pile
+            if curr_h > h:
                 left = k + 1
+            else:
+                res = min(res,k) # valid speed K, need to update my result
+                right = k - 1
         return res
 
