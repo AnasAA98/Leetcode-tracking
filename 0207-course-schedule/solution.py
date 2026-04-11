@@ -1,22 +1,22 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        prereq = {i: [] for i in range(numCourses)}
-        for course, preq in prerequisites:
-            prereq[course].append(preq)
-        visited =  set()
-        def explore(crs) -> bool:
-            if crs in visited:
+        preMap = {i:[] for i in range(numCourses)}
+        for crs, pre in prerequisites:
+            preMap[crs].append(pre)
+        seen = set() # keep track of cycles
+        def dfs(crs):
+            if crs in seen:
                 return False
-            if prereq[crs] == []:
+            if preMap[crs] == []:
                 return True
-            visited.add(crs)
-            for preq in prereq[crs]:
-                if not explore(preq):
+            seen.add(crs)
+            for pre in preMap[crs]:
+                if not dfs(pre):
                     return False
-            visited.remove(crs)
-            prereq[crs] = []
+            seen.remove(crs)
+            preMap[crs] = []
             return True
-        for crs in range(numCourses):
-            if not explore(crs):
+        for i in range(numCourses):
+            if not dfs(i):
                 return False
         return True
