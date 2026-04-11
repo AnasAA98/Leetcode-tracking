@@ -3,11 +3,12 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        # keep track of last non zero index
-        k = 0
-        for i in range(len(nums)):
-            if nums[i] != 0:
-                nums[i],nums[k] = nums[k],nums[i]
-                k+=1
-        
+        n = len(nums)
+        left = 0
+        for right in range(n):
+            if nums[right] != 0:
+                nums[left], nums[right] = nums[right], nums[left]
+                left +=1
+
+
 
