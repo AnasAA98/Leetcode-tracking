@@ -2,7 +2,6 @@ class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         n = len(digits)
         result = []
-        path = []
         my_map = {
             "2": "abc",
             "3": "def",
@@ -13,15 +12,15 @@ class Solution:
             "8": "tuv",
             "9": "wxyz",
         }
-        def explore(index):
-            if index == n :
+        def backtrack(index,path):
+            if index == n:
                 result.append("".join(path))
                 return
-            
-            number = my_map[digits[index]]
-            for ch in number:
+            strs = my_map[digits[index]]
+            for ch in strs:
                 path.append(ch)
-                explore(index+1)
+                backtrack(index+1,path)
                 path.pop()
-        explore(0)
+        backtrack(0,[])
         return result
+
