@@ -1,11 +1,11 @@
 class Solution:
     def removeElement(self, nums: List[int], val: int) -> int:
-        if not nums:
-            return 0
-        # k is index of the last number not equal to val
-        k = 0
-        for i in range(len(nums)):
-            if nums[i] != val:
-                nums[k] = nums[i]
-                k+=1
-        return k
+        count = 0
+        left = 0
+        for right in range(len(nums)):
+            if nums[right] != val:
+                nums[left], nums[right] = nums[right], nums[left]
+                left+=1
+                count +=1
+        return count
+
