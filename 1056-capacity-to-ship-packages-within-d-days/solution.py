@@ -1,21 +1,20 @@
 class Solution:
     def shipWithinDays(self, weights: List[int], days: int) -> int:
-        low = max(weights)
-        high = sum(weights)
-        while low < high:
-            # curr capacity
-            mid_cap = (low+ high) // 2
-            curr_capacity = 0
-            start_day = 1
-            for w in weights:
-                if curr_capacity + w <= mid_cap:
-                    curr_capacity+=w
-                else:
-                    start_day +=1
-                    curr_capacity = w
-            if start_day <= days:
-                high = mid_cap
+        left = max(weights)
+        right = sum(weights)
+        res = right
+        while left <= right:
+            mid = (left + right) // 2 # candidate cap
+            curr_days = 1
+            curr_cap = 0
+            for wei in weights:
+                curr_cap += wei
+                if curr_cap  > mid:
+                    curr_days +=1
+                    curr_cap = wei
+            if curr_days <= days:
+                right = mid - 1
+                res = min(res,mid)
             else:
-                low = mid_cap +1
-        return low
-
+                 left = mid + 1
+        return res
