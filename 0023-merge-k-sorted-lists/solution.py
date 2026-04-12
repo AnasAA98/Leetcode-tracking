@@ -11,23 +11,19 @@ class Solution:
             return lists[0]
         heap = []
         counter = 0
-        for i in range(len(lists)):
-            curr = lists[i]
+        for link in lists:
+            curr = link
             while curr:
                 heap.append((curr.val,counter,curr))
                 counter+=1
                 curr = curr.next
-        if not heap:
-           return None
+        if not heap: # if lists is populated with empty lists
+            return None
         heapq.heapify(heap)
-        head = heapq.heappop(heap)[2]
-        prev = head
+        head = ListNode(0)
+        curr = head
         while heap:
-            prev.next = heapq.heappop(heap)[2]
-            prev = prev.next
-        prev.next = None
-        return head
-        
-
-
-        
+            curr.next = heapq.heappop(heap)[2]
+            curr = curr.next
+        curr.next = None
+        return head.next
