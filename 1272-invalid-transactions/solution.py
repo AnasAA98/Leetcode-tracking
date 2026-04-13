@@ -1,20 +1,18 @@
 class Solution:
     def invalidTransactions(self, transactions: List[str]) -> List[str]:
-        name_transaction = {}
-        invalid_indices = set()
-        for index,transaction in enumerate(transactions):
-            name,time,amount,city = transaction.split(",")
-            time,amount = int(time),int(amount)
+        map_tr = defaultdict(list)
+        res = set()
+        for i,tran in enumerate(transactions):
+            name,time,amount,city = tran.split(",")
+            time = int(time)
+            amount = int(amount)
+            map_tr[name].append((time,amount,city,i))
             if amount > 1000:
-                invalid_indices.add(index)
-                
-            if name not in name_transaction:
-                name_transaction[name] = []
-            for t,a,c,i in name_transaction[name]:
-                if c != city and abs(t-time) <= 60:
-                    invalid_indices.add(index)
-                    invalid_indices.add(i)
-            name_transaction[name].append((time,amount,city,index))
-        return [transactions[i] for i in invalid_indices]
-
+                res.add(i)
+            for k in map_tr[name]:
+                t,amt,c,index = k
+                if abs(t - time) <= 60 and c != city:
+                    res.add(index)
+                    res.add(i)
+        return [transactions[i] for i in res]
             
