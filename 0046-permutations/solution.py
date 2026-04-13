@@ -1,17 +1,15 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        result = []
-        path = []
-        n = len(nums)
-        def dfs(index):
-            if index == n:
-                result.append(path[:])
+        res = []
+        def dfs(path):
+            if len(path) == len(nums):
+                res.append(path[:])
                 return
-            for x in nums:
-                if x not in path:
-                    path.append(x)
-                    dfs(index+1)
-                    path.pop()        
-
-        dfs(0)
-        return result
+            for num in nums:
+                if num not in path:
+                    path.append(num)
+                    dfs(path)
+                    path.pop()
+        dfs([])
+        return res
+            
