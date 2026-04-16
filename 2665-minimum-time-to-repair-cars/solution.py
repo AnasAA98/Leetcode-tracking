@@ -1,18 +1,22 @@
 class Solution:
     def repairCars(self, ranks: List[int], cars: int) -> int:
-        low = 1 # 1 car 1 mechanic ranked 1
-        high = max(ranks) * (cars ** 2) # the time it takes if that worst mechanic fixed ALL the cars alone
+        low = 1
+        high = max(ranks) * (cars**2)
         res = math.inf
         while low <= high:
-            mid = (low + high) //2 
-            total_cars = 0
+            candidate = (low + high) // 2 # mins
+            num_cars = 0
             for rank in ranks:
-                total_cars += int(sqrt(mid/rank))
-            if total_cars < cars:
-                low = mid + 1
+                num_cars += int(sqrt(candidate / rank))
+            if num_cars < cars:
+                low = candidate + 1 # number of mins not enough to clear out all cars
             else:
-                res = min(res, mid) # candidate time
-                high = mid - 1
-
+                res = min(res,candidate)
+                high = candidate - 1
         return res
+
+
+
+            
+
 
