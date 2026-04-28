@@ -1,11 +1,11 @@
 class Solution:
     def furthestDistanceFromOrigin(self, moves: str) -> int:
-        L,R,U = 0,0,0
-        for c in moves:
-            if c == "L":
-                L +=1
-            elif c == "R":
-                R += 1
+        Left,Right,Und = 0,0,0
+        for ch in moves:
+            if ch == "L":
+                Left+=1
+            elif ch == "R":
+                Right+=1
             else:
-                U += 1
-        return abs(L - R) + U
+                Und+=1
+        return abs(Left - Right) + Und
