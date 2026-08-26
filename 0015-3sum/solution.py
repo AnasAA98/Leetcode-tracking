@@ -4,20 +4,17 @@ class Solution:
         nums.sort()
         res = []
         for i in range(n):
-            # duplpicate solutions
             if i > 0 and nums[i] == nums[i -1]:
                 continue
-            # no more negative numbers
-            if nums[i] > 0:
+            if nums[i] > 0 :
                 break
-            l,r = i + 1, n - 1
+            l, r = i + 1, n - 1
             while l < r:
                 curr = nums[i] + nums[l] + nums[r]
                 if curr == 0:
-                    res.append([nums[i],nums[l],nums[r]])
-                    l+=1
-                    r-=1
-                    # skip more dups
+                    res.append([nums[i], nums[l], nums[r]])
+                    l += 1
+                    r -= 1
                     while l < r and nums[l] == nums[l - 1]:
                         l += 1
                 elif curr > 0:
@@ -25,5 +22,3 @@ class Solution:
                 else:
                     l += 1
         return res
-
-
