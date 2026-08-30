@@ -1,38 +1,41 @@
 class Solution:
-    def isValidSudoku(self, grid: List[List[str]]) -> bool:
-        set_rows = set()
-        set_cols = set()
-        set_squares = set()
-        # check rows
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        set_row = set()
+        set_col = set()
+        set_sqr = set()
+        # row check
         for i in range(9):
             for j in range(9):
-                if grid[i][j] == ".":
-                    continue
-                elif grid[i][j] in set_rows:
+                if board[i][j] in set_row:
                     return False
+                elif board[i][j] == '.':
+                    continue
                 else:
-                    set_rows.add(grid[i][j])
-            set_rows.clear()
-        # check columns
+                    set_row.add(board[i][j])
+            set_row.clear()
+
+        # column check
         for i in range(9):
             for j in range(9):
-                if grid[j][i] == ".":
-                    continue
-                elif grid[j][i] in set_cols:
+                if board[j][i] in set_col:
                     return False
+                elif board[j][i] == '.':
+                    continue
                 else:
-                    set_cols.add(grid[j][i])
-            set_cols.clear()
-        # check squares
-        for square_r in range(0,9,3):
-            for square_c in range(0,9,3):
-                for i in range(square_r,square_r+3):
-                    for j in range(square_c,square_c+3):
-                        if grid[i][j] == ".":
-                            continue
-                        elif grid[i][j] in set_squares:
+                    set_col.add(board[j][i])
+            set_col.clear()
+
+        
+        # square check
+        for r in range(0,9,3):
+            for c in range(0,9,3):
+                for i in range(r, r + 3):
+                    for j in range(c, c + 3):
+                        if board[i][j] in set_sqr:
                             return False
+                        elif board[i][j] == '.':
+                            continue
                         else:
-                            set_squares.add(grid[i][j])
-                set_squares.clear()
+                            set_sqr.add(board[i][j])
+                set_sqr.clear()
         return True
