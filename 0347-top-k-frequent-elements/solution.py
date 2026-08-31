@@ -6,5 +6,5 @@ class Solution:
             heapq.heappush(heap,(freq,num))
             if len(heap) > k:
                 heapq.heappop(heap)
-        return [num for freq,num in heap]
+        return [num for _,num in heap]
 
