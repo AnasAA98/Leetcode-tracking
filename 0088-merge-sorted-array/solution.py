@@ -3,20 +3,18 @@ class Solution:
         """
         Do not return anything, modify nums1 in-place instead.
         """
-        # we will basically populate the array backwrads
-        i = m - 1
-        j = n - 1
-        k = len(nums1) - 1
-        while i >= 0 and j >= 0:
-            if nums1[i] >= nums2[j]:
-                nums1[k] = nums1[i]
-                i -= 1
+        p1, p2, p = 0, 0, 0
+        temp = nums1[:m]
+        while p1 < m and p2 < n:
+            if temp[p1] <= nums2[p2]:
+                nums1[p] = temp[p1]
+                p1 += 1
             else:
-                nums1[k] =  nums2[j]
-                j -= 1
-            k -= 1
-        if j >= 0:
-            for d in range(j + 1):
-                nums1[d] =  nums2[d]
+                nums1[p] = nums2[p2]
+                p2 += 1
+            p += 1
+        if p1 < m:
+            nums1[p:] = temp[p1:]
+        if p2 < n:
+            nums1[p:] = nums2[p2:] 
 
-                
