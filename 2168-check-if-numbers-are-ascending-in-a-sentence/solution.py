@@ -2,16 +2,13 @@ class Solution:
     def areNumbersAscending(self, s: str) -> bool:
         array = s.split()
         res = []
-
-        for w in array:
-            try:
-                res.append(int(w))
-            except ValueError:
-                continue
-        
-        for i in range(1,len(res)):
-            if res[i] <= res[i - 1]:
-                return False
+        prev = -1
+        for word in array:
+            if word.isdigit():
+                if prev >= int(word):
+                    return False
+                else:
+                    prev = int(word)
         return True
-            
+                
 
