@@ -1,5 +1,5 @@
 class Solution:
-    def majorityElement(self, nums: List[int]) -> int:
+    def majorityElement(self, nums: list[int]) -> int:
         candidate = None
         freq = 0
         for x in nums:
@@ -8,6 +8,6 @@ class Solution:
                 freq = 1
             elif x == candidate:
                 freq += 1
-            else:
+            else :
                 freq -= 1
-        return candidate
+        return candidate 
