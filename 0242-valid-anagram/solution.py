@@ -1,15 +1,13 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        # check length
         if len(s) != len(t):
             return False
-        my_map = defaultdict(int)
+        res = defaultdict(int)
         for ch in s:
-            my_map[ch] +=1
-        for c in t:
-            if c not in my_map or my_map[c] == 0:
+            res[ch] += 1
+        for ch in t:
+            if ch not in res or res[ch] == 0:
                 return False
-            else:
-                my_map[c] -= 1
+            res[ch] -= 1
         return True
-        
+
