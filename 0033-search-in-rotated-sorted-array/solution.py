@@ -1,16 +1,18 @@
 class Solution:
-    def search(self, nums: List[int], target: int) -> int:
-        n = len(nums)
-        left = 0
-        right = n -1
+    def search(self, nums: list[int], target: int) -> int:
+        left = 0 
+        right = len(nums) -1 
+
         while left <= right:
-            mid = (left + right ) // 2
+            mid = (left + right) // 2
             if nums[mid] == target:
-                return mid
+                return mid 
+            # identify which side is sorted 
             if nums[left] <= nums[mid]:
+                # check if target is between left and mid
                 if nums[left] <= target < nums[mid]:
                     right = mid - 1
-                else:
+                else :
                     left = mid + 1
             else:
                 if nums[mid] < target <= nums[right]:
