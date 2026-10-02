@@ -4,19 +4,25 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def reorderList(self, head: Optional[ListNode]) -> None:
+    def reorderList(self, head: ListNode | None) -> None:
         """
         Do not return anything, modify head in-place instead.
         """
-        # step 1: find middle of the list
+        # get the middle of the list 
+        # reverse that right half 
+        # then rebuild the linked list by alternating
+        
+        # Step 1: Find mid of the list
         slow = head
         fast = head
         while fast and fast.next:
             slow = slow.next
-            fast= fast.next.next
+            fast = fast.next.next
+        
         mid = slow.next
+        # Step 2: reverse second half
         prev = None
-        curr = mid 
+        curr = mid
         while curr:
             nxt = curr.next
             curr.next = prev
@@ -32,4 +38,5 @@ class Solution:
             curr2.next = nxt1
             curr1 = nxt1
             curr2 = nxt2
+        
 
