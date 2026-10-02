@@ -17,3 +17,4 @@ class Solution:
             even = even.next
         odd.next = evenHead
         return head
+
