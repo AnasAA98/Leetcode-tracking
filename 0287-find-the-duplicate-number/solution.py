@@ -1,6 +1,15 @@
 class Solution:
-    def findDuplicate(self, nums: List[int]) -> int:
-        nums.sort()
-        for i in range(1,len(nums)):
-            if nums[i-1] == nums[i]:
-                return nums[i]
+    def findDuplicate(self, nums: list[int]) -> int:
+        low, high = 0, len(nums) - 1
+        while low <= high:
+            mid = (low + high) // 2
+            count = sum(num <= mid for num in nums)
+            
+            if count > mid:
+                high = mid - 1
+            else:
+                low = mid + 1
+
+        return low 
+
+
